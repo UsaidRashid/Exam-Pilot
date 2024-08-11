@@ -5,10 +5,6 @@ const questionsSchema = new mongoose.Schema({
         type : String,
         required : true,
     },
-    requestId : {
-        type : String,
-        required : true,
-    },
     timeAllotted : {
         type : Number,
         required : true,

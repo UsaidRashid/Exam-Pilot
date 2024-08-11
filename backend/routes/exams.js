@@ -6,7 +6,7 @@ const {isLoggedIn} = require("../middleware");
 
 router
     .route("/")
-        .get(isLoggedIn,examController.getUpcomingExams);
+        .post(isLoggedIn,examController.getUpcomingExams);
 
 
 module.exports=router;

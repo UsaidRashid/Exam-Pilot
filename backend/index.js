@@ -68,7 +68,7 @@ const examRouter = require("./routes/exams");
 
 app.use("/",userRouter);
 app.use("/upcoming-exams",examRouter);
-app.use("/generate-questions",questionRouter);
+app.use("/questions",questionRouter);
 
 app.get("/",(req,res) => {
   res.send("Hello from the backend!");
