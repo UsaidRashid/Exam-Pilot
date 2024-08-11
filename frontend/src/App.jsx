@@ -3,8 +3,8 @@ import './App.css'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
 import Home from './Components/Home'
-import TeacherDasboard from './Components/TeacherDasboard'
-import UpcommingExams from './Components/UpcommingExams'
+import TeacherDashboard from './Components/TeacherDashboard'
+import UpcomingExams from './Components/UpcomingExams'
 import Exams from './Components/Exams'
 
 function App() {
@@ -12,11 +12,11 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Login/> } />
           <Route path='/signup' element={<Signup/> } />
-          <Route path='/home' element={<Home/> } />
-          <Route path='/teacher-dashboard' element={<TeacherDasboard />} />
-          <Route path='/upcoming-exam' element={<UpcommingExams/> } />
+          <Route path='/login' element={<Login/> } />
+          <Route path='/' element={<Home/> } />
+          <Route path='/teacher-dashboard' element={<TeacherDashboard />} />
+          <Route path='/upcoming-exams' element={<UpcomingExams/> } />
           <Route path='/exams' element={<Exams/> } />
       </Routes>
       </BrowserRouter>
