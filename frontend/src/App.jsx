@@ -6,6 +6,7 @@ import Home from './Components/Home'
 import TeacherDashboard from './Components/TeacherDashboard'
 import UpcomingExams from './Components/UpcomingExams'
 import Exams from './Components/Exams'
+import DisplayPaper from './Components/DisplayPaper'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/login' element={<Login/> } />
           <Route path='/' element={<Home/> } />
           <Route path='/teacher-dashboard' element={<TeacherDashboard />} />
+          <Route path='/display-paper/:id' element={<DisplayPaper />} />
           <Route path='/upcoming-exams' element={<UpcomingExams/> } />
           <Route path='/exams' element={<Exams/> } />
       </Routes>

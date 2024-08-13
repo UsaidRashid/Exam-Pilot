@@ -27,18 +27,20 @@ export default function Signup() {
   async function setData(e) {
     e.preventDefault();
     try {
-    //   const response = await axios.post("YOUR_BACKEND_API_ENDPOINT", user);
-    //   if (response.status === 200) {
-    //     navigate("/home");
-    //   } else {
-    //     // Handle error (e.g., show an error message)
-    //     console.error("Signup failed:", response.data);
-    //   }
+      const response = await axios.post("http://localhost:3001/signup", user);
+      if (response.status === 200) {
+        
+        navigate("/home");
+      } else {
+        
+        console.error("Signup failed:", response.data);
+      }
     } catch (error) {
       console.error("There was an error during signup:", error);
-      // Handle error (e.g., show an error message)
+      
     }
   }
+
 
   return (
     <>
