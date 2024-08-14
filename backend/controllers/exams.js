@@ -4,7 +4,6 @@ const generateRandomQuestions = require("../ai_module/AI");
 
 module.exports.generateQuestions = async (req, res) => {
   try {
-    console.log(req.body);
     const numQuestions = req.body.numQuestions;
     const timeAllotted = req.body.timeAllotted;
     const scheduledTime = req.body.scheduledTime;
@@ -19,7 +18,7 @@ module.exports.generateQuestions = async (req, res) => {
     }
 
     const imagePath = req.file.path;
-    console.log(imagePath);
+
     if (!imagePath)
       return res.status(500).json({ message: "Missing syllabus image" });
 
@@ -27,7 +26,6 @@ module.exports.generateQuestions = async (req, res) => {
       imagePath,
       numQuestions
     );
-    console.log(generatedQuestionsText);
     const questionArray = [];
 
     let cnt = 1;
@@ -144,7 +142,6 @@ module.exports.getUpcomingExams = async (req, res) => {
 
 module.exports.checkExam = async (req, res) => {
   try {
-    console.log(req.body);
     const { answers, examId, studentId } = req.body;
     const student = await User.findOne({ _id: studentId });
     const exam = await Questions.findOne({ _id: examId });
@@ -152,7 +149,6 @@ module.exports.checkExam = async (req, res) => {
       return res.status(400).json({ message: "No user or Exam found" });
     let examsGiven = student.examsGiven;
     examsGiven++;
-    console.log(exam);
     const questions = exam.questions;
     let score = 0;
     for (let i = 0; i < questions.length; i++) {

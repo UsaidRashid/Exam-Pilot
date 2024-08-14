@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const examController = require("../controllers/exams");
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const upload = require("../configs/multerConfig");
 
 router
   .route("/generate-questions")

@@ -1,6 +1,5 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const Tesseract = require('tesseract.js');
-require('dotenv').config();
 
 async function extractTextFromImage(imagePath) {
     try {

@@ -2,10 +2,7 @@ const User = require("../models/users");
 const jwt = require("jsonwebtoken");
 
 module.exports.signUp = async (req, res) => {
-  console.log(req.body);
   let { name, email, password, contact, username, type } = req.body;
-
-  console.log(req.body);
 
   if (!name || !email || !contact || !password || !username || !type) {
     return res.status(400).json({ message: "Please fill in all fields" });
@@ -41,9 +38,13 @@ module.exports.signUp = async (req, res) => {
         console.log(err);
         return res.status(400).json({ message: "Error saving the user" });
       } else {
-        const token = jwt.sign({ user: registeredUser }, "jwt-secret", {
-          algorithm: "HS256",
-        });
+        const token = jwt.sign(
+          { user: registeredUser },
+          process.env.JWT_SECRET,
+          {
+            algorithm: "HS256",
+          }
+        );
         return res
           .status(200)
           .json({ message: "User created successfully", token });
@@ -57,7 +58,9 @@ module.exports.signUp = async (req, res) => {
 
 module.exports.login = async (req, res) => {
   const user = await User.findOne({ username: req.body.username });
-  const token = jwt.sign({ user }, "jwt-secret", { algorithm: "HS256" });
+  const token = jwt.sign({ user }, process.env.JWT_SECRET, {
+    algorithm: "HS256",
+  });
   return res.status(200).json({ message: "Login successful!", token });
 };
 
