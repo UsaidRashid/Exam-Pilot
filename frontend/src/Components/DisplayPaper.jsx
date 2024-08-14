@@ -77,8 +77,8 @@ export default function DisplayPaper(props) {
   const location = useLocation();
 
   useEffect(() => {
-    console.log(location.state.props.paper);
-    setPaper(location.state.props.paper);
+    console.log(location.state.paper);
+    setPaper(location.state.paper);
   }, []);
 
   return (

@@ -13,6 +13,7 @@ export default function UpcomingExams() {
           "http://localhost:3001/upcoming-exams"
         );
         if (response.status === 200) {
+          console.log(response.data.exams);
           setExams(response.data.exams);
         } else {
           alert("Error in fetching exams");
@@ -22,7 +23,7 @@ export default function UpcomingExams() {
       }
     };
     main();
-  });
+  },[exams]);
 
   const getdata = (paper) => {
     navigate(`/display-paper`, { state: { paper } });

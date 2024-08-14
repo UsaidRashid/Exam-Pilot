@@ -494,7 +494,7 @@ export default function TeacherDashboard() {
               <li className="bg-gray-500 px-2 py-4 rounded-full text-white">
                 Dashboard
               </li>
-              <Link to={"/upcoming-exam"}>
+              <Link to={"/upcoming-exams"}>
                 <li className="bg-gray-500 px-2 py-4 rounded-full text-white">
                   Upcoming Exams
                 </li>
