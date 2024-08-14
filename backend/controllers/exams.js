@@ -10,7 +10,7 @@ module.exports.getUpcomingExams = async (req, res) => {
         .json({
           message:
             "Successfully retrieved all upcoming exams from the database",
-          formattedExams: upcomingExamsArray,
+          exams: upcomingExamsArray,
         });
     } else {
       res.status(500).json({ message: "No upcoming exams exist!" });

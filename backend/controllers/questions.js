@@ -16,7 +16,7 @@ module.exports.generateQuestions = async (req, res) => {
       !numQuestions ||
       !timeAllotted ||
       !scheduledTime ||
-      !requestId ||
+    
       !name
     ) {
       return res
@@ -132,6 +132,7 @@ module.exports.generateQuestions = async (req, res) => {
 module.exports.fetchQuestions = async (req, res) => {
   try {
     const { _id } = req.body;
+    console.log("Received _id:", _id);
     const questions = await Questions.findOne({ _id });
     if (questions) {
       res

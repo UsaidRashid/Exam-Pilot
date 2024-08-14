@@ -1,9 +1,32 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function UpcomingExams() {
-  const [exam, setExam] = useState([]);
+  const [exams, setExams] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const main = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:3001/upcoming-exams"
+        );
+        if (response.status === 200) {
+          setExams(response.data.exams);
+        } else {
+          alert("Error in fetching exams");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    main();
+  });
+
+  const getdata = (paper) => {
+    navigate(`/display-paper`, { state: { paper } });
+  };
 
   return (
     <>
@@ -34,8 +57,8 @@ export default function UpcomingExams() {
               <h1 className="text-center text-3xl text-gray-500 font-bold mt-9">
                 Upcoming Exams
               </h1>
-              {exam &&
-                exam.map((item, index) => {
+              {exams &&
+                exams.map((item, index) => {
                   return (
                     <li
                       key={index}
@@ -57,7 +80,7 @@ export default function UpcomingExams() {
                           </div>
                           <button
                             className=" px-8 rounded-md cursor-pointer h-8 text-white bg-slate-500 hover:bg-slate-700"
-                            // onClick={() => getdata(item)}
+                            onClick={() => getdata(item)}
                           >
                             go to exam
                           </button>
