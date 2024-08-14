@@ -7,6 +7,9 @@ import DisplayPaper from "./Components/DisplayPaper";
 import Navbar from "./Components/Navbar";
 import TeacherDashboard from "./Components/TeacherDashboard";
 import StudentDashboard from "./Components/StudentDashboard";
+import ProtectedRoute from "./Components/ProtectedRoute";
+import ProtectPaper from "./Components/ProtectPaper";
+import Home from "./Components/Home";
 
 const AppContent = () => {
   const location = useLocation();
@@ -21,12 +24,43 @@ const AppContent = () => {
     <>
       {showNavbar && <Navbar />}
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
-        <Route path="/student-dashboard" element={<StudentDashboard />} />
-        <Route path="/display-paper" element={<DisplayPaper />} />
-        <Route path="/upcoming-exams" element={<UpcomingExams />} />
+        <Route
+          path="/teacher-dashboard"
+          element={
+            <ProtectedRoute>
+              <TeacherDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/student-dashboard"
+          element={
+            <ProtectedRoute>
+              <StudentDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/display-paper"
+          element={
+            <ProtectedRoute>
+              <ProtectPaper>
+                <DisplayPaper />
+              </ProtectPaper>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/upcoming-exams"
+          element={
+            <ProtectedRoute>
+              <UpcomingExams />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );
