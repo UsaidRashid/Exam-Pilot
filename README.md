@@ -1,1 +1,1 @@
-Web Application Live at => https://exam-pilot.onrender.com/login
+Web Application Live at => https://exam-pilot.onrender.com/
