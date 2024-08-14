@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+const api = import.meta.env.VITE_BACKEND_URL;
 
 export default function DisplayPaper(props) {
   const [paper, setPaper] = useState();
@@ -34,7 +35,7 @@ export default function DisplayPaper(props) {
       console.log("Answers submitted: ", answers);
       const paperId = paper._id;
       const response = await axios.post(
-        "http://localhost:3001/exams/check-exam",
+        api+"check-exam",
         { answers, examId: paperId, studentId: userId }
       );
       if (response.status === 200) {
