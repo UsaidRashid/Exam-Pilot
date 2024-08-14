@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 export default function Login() {
   const navigate = useNavigate();
-  
+
   let [user, setUser] = useState({
     username: "",
     password: "",
@@ -26,15 +27,19 @@ export default function Login() {
     try {
       const response = await axios.post("http://localhost:3001/login", user);
       if (response.status === 200) {
-        alert('Login Succesful!');
-        localStorage.setItem('token',response.data.token);
-        navigate("/dashboard");
+        alert("Login Succesful!");
+        localStorage.setItem("token", response.data.token);
+        const decodedToken = jwtDecode(response.data.token);
+        if (decodedToken.user.type === "Teacher") {
+          navigate("/teacher-dashboard");
+        } else {
+          navigate("/student-dashboard");
+        }
       } else {
         console.error("Login failed:", response.data);
       }
     } catch (error) {
       console.error("There was an error during login:", error);
-      
     }
   }
 

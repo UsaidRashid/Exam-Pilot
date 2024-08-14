@@ -31,9 +31,10 @@ export default function Signup() {
       console.log(user);
       const response = await axios.post("http://localhost:3001/signup", user);
       if (response.status === 200) {
-        alert('Registration Successful!');
-        localStorage.setItem("token",response.data.token);
-        navigate("/dashboard");
+        alert("Registration Successful!");
+        localStorage.setItem("token", response.data.token);
+        if (user.type === "Teacher") navigate("/teacher-dashboard");
+        else navigate("/student-dashboard");
       } else {
         console.error("Signup failed:", response.data);
       }
