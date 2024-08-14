@@ -4,32 +4,33 @@ import axios from "axios";
 import Sidebar from "./Sidebar";
 
 export default function TeacherDashboard() {
-  let [paper, setpaper] = useState({
+  const [paper, setPaper] = useState({
     name: "",
     numQuestions: 0,
     scheduledTime: "",
     timeAllotted: 0,
     syllabusImage: null,
   });
+
   const navigate = useNavigate();
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setpaper((old) => ({
+    setPaper((old) => ({
       ...old,
       [name]: value,
     }));
-  }
+  };
 
-  function getFile(e) {
+  const getFile = (e) => {
     const { name, files } = e.target;
-    setpaper((old) => ({
+    setPaper((old) => ({
       ...old,
       [name]: files[0],
     }));
-  }
+  };
 
-  async function postData(e) {
+  const postData = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -54,25 +55,25 @@ export default function TeacherDashboard() {
         alert("Paper Generated Successfully!");
         window.location.reload();
       }
-      // const { _id } = response.data;
-      // navigate(`/display-paper/${_id}`);
     } catch (error) {
       console.error("error in sending backend request", error);
     }
-  }
+  };
 
   return (
-    <>
-      <div className=' bg-[url("./public/assets/dasboardBackground.jpeg")] bg-no-repeat bg-cover w-full h-screen'>
-        <div className="mx-16 mt-12 flex">
-          <Sidebar />
-          <div className="mx-48">
-            <div className="text-2xl font-bold mb-14">Details for Exam:</div>
-            <form className="mx-9" onSubmit={postData}>
-              <div className="my-7 flex">
+    <div className="bg-dashboard bg-cover bg-center min-h-screen flex">
+      <Sidebar />
+      <div className="flex-grow p-8">
+        <div className="max-w-4xl mx-auto bg-white/80 backdrop-blur-lg rounded-lg shadow-lg p-6">
+          <h1 className="text-3xl font-bold text-gray-700 text-center mb-8">
+            Create Exam Paper
+          </h1>
+          <form onSubmit={postData}>
+            <div className="space-y-6">
+              <div className="flex items-center">
                 <label
                   htmlFor="Name"
-                  className="bg-gray-300 py-4 px-8 rounded-full mr-16 w-44 text-center block"
+                  className="w-44 text-center text-lg font-semibold text-gray-700"
                 >
                   Subject:
                 </label>
@@ -81,14 +82,14 @@ export default function TeacherDashboard() {
                   name="name"
                   value={paper.name}
                   onChange={handleChange}
-                  className="border-b-2 border-white outline-none bg-transparent mx-44 text-white"
+                  className="w-full p-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   id="Name"
                 />
               </div>
-              <div className="my-7 flex">
+              <div className="flex items-center">
                 <label
                   htmlFor="numQuestions"
-                  className="bg-gray-300 py-4 px-8 rounded-full mr-16 w-44 text-center block"
+                  className="w-44 text-center text-lg font-semibold text-gray-700"
                 >
                   Questions:
                 </label>
@@ -97,14 +98,14 @@ export default function TeacherDashboard() {
                   name="numQuestions"
                   value={paper.numQuestions}
                   onChange={handleChange}
-                  className="border-b-2 border-white outline-none bg-transparent mx-44 text-white"
+                  className="w-full p-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   id="numQuestions"
                 />
               </div>
-              <div className="my-7 flex">
+              <div className="flex items-center">
                 <label
                   htmlFor="scheduledTime"
-                  className="bg-gray-300 py-4 px-8 rounded-full mr-16 w-44 text-center block"
+                  className="w-44 text-center text-lg font-semibold text-gray-700"
                 >
                   Starting Time:
                 </label>
@@ -113,14 +114,14 @@ export default function TeacherDashboard() {
                   name="scheduledTime"
                   value={paper.scheduledTime}
                   onChange={handleChange}
-                  className="border-b-2 border-white outline-none bg-transparent mx-44 text-white"
+                  className="w-full p-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   id="scheduledTime"
                 />
               </div>
-              <div className="my-7 flex">
+              <div className="flex items-center">
                 <label
                   htmlFor="timeAllotted"
-                  className="bg-gray-300 py-4 px-8 rounded-full mr-16 w-44 text-center block"
+                  className="w-44 text-center text-lg font-semibold text-gray-700"
                 >
                   Allotted Time:
                 </label>
@@ -129,19 +130,19 @@ export default function TeacherDashboard() {
                   name="timeAllotted"
                   value={paper.timeAllotted}
                   onChange={handleChange}
-                  className="border-b-2 border-white outline-none bg-transparent mx-44 text-white"
+                  className="w-full p-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   id="timeAllotted"
                 />
               </div>
-              <div className="flex gap-40">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center justify-center w-64">
                   <label
                     htmlFor="dropzone-file"
-                    className="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                    className="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-indigo-300 rounded-lg cursor-pointer transition hover:bg-indigo-50"
                   >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       <svg
-                        className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                        className="w-10 h-10 mb-4 text-indigo-500"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -155,12 +156,12 @@ export default function TeacherDashboard() {
                           d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                         />
                       </svg>
-                      <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      <p className="mb-2 text-sm text-gray-500">
                         <span className="font-semibold">Click to upload</span>{" "}
                         or drag and drop
                       </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
-                        SVG, PNG, JPG or GIF (MAX. 800x400px)
+                      <p className="text-xs text-gray-500">
+                        SVG, PNG, JPG, or GIF (MAX. 800x400px)
                       </p>
                     </div>
                     <input
@@ -174,15 +175,15 @@ export default function TeacherDashboard() {
                 </div>
                 <button
                   type="submit"
-                  className="bg-gray-300 rounded-full h-16 w-44 text-center"
+                  className="bg-indigo-500 text-white rounded-full py-3 px-8 transition hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Generate
                 </button>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
