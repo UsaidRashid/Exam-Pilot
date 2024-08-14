@@ -29,8 +29,7 @@ export default function Signup() {
   async function setData(e) {
     e.preventDefault();
     try {
-      console.log(user);
-      const response = await axios.post(api+"signup", user);
+      const response = await axios.post(api + "signup", user);
       if (response.status === 200) {
         alert("Registration Successful!");
         localStorage.setItem("token", response.data.token);
@@ -40,7 +39,19 @@ export default function Signup() {
         console.error("Signup failed:", response.data);
       }
     } catch (error) {
-      console.error("There was an error during signup:", error);
+      console.error("Error in Signing up:", error);
+      if (error.response) {
+        alert(
+          "Error from server: " +
+            error.response.status +
+            " - " +
+            error.response.data.message
+        );
+      } else if (error.request) {
+        alert("No response from the server");
+      } else {
+        alert("Error setting up the request: " + error.message);
+      }
     }
   }
 

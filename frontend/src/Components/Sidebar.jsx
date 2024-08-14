@@ -35,9 +35,7 @@ export default function Sidebar() {
           <div className="text-gray-400">{token?.user?.email}</div>
         </div>
       </div>
-      <div className="mt-8">
-        
-      </div>
+      <div className="mt-8"></div>
     </div>
   );
 }

@@ -42,22 +42,29 @@ export default function TeacherDashboard() {
     formData.append("syllabusImage", paper.syllabusImage);
 
     try {
-      const response = await axios.post(
-        api+"generate-questions/",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log("got response", response.data);
+      const response = await axios.post(api + "exams/generate-questions", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       if (response.status === 200) {
         alert("Paper Generated Successfully!");
         window.location.reload();
       }
     } catch (error) {
-      console.error("error in sending backend request", error);
+      console.error("Error in Generating Paper:", error);
+      if (error.response) {
+        alert(
+          "Error from server: " +
+            error.response.status +
+            " - " +
+            error.response.data.message
+        );
+      } else if (error.request) {
+        alert("No response from the server");
+      } else {
+        alert("Error setting up the request: " + error.message);
+      }
     }
   };
 

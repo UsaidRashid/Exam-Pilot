@@ -26,7 +26,7 @@ export default function Login() {
   async function setData(e) {
     e.preventDefault();
     try {
-      const response = await axios.post(api+"login", user);
+      const response = await axios.post(api + "login", user);
       if (response.status === 200) {
         alert("Login Succesful!");
         localStorage.setItem("token", response.data.token);
@@ -37,7 +37,19 @@ export default function Login() {
           navigate("/student-dashboard");
         }
       } else {
-        console.error("Login failed:", response.data);
+        console.error("Error in Logging in:", error);
+        if (error.response) {
+          alert(
+            "Error from server: " +
+              error.response.status +
+              " - " +
+              error.response.data.message
+          );
+        } else if (error.request) {
+          alert("No response from the server");
+        } else {
+          alert("Error setting up the request: " + error.message);
+        }
       }
     } catch (error) {
       console.error("There was an error during login:", error);

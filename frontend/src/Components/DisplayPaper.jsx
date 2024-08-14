@@ -32,12 +32,12 @@ export default function DisplayPaper(props) {
 
   const handleFinishExam = async () => {
     try {
-      console.log("Answers submitted: ", answers);
       const paperId = paper._id;
-      const response = await axios.post(
-        api+"check-exam",
-        { answers, examId: paperId, studentId: userId }
-      );
+      const response = await axios.post(api + "exams/check-exam", {
+        answers,
+        examId: paperId,
+        studentId: userId,
+      });
       if (response.status === 200) {
         alert("Exam Successfully Submitted");
         navigate("/student-dashboard");
@@ -45,8 +45,19 @@ export default function DisplayPaper(props) {
         alert(response.data.message || "An Error occured");
       }
     } catch (error) {
-      alert("Internal Server Error");
-      console.error(error);
+      console.error("Error in Displaying Paper:", error);
+      if (error.response) {
+        alert(
+          "Error from server: " +
+            error.response.status +
+            " - " +
+            error.response.data.message
+        );
+      } else if (error.request) {
+        alert("No response from the server");
+      } else {
+        alert("Error setting up the request: " + error.message);
+      }
     }
   };
 

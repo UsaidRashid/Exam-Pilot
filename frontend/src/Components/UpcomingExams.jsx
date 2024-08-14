@@ -10,17 +10,26 @@ export default function UpcomingExams() {
   useEffect(() => {
     const main = async () => {
       try {
-        const response = await axios.post(
-          api+"upcoming-exams"
-        );
+        const response = await axios.post(api + "exams/upcoming-exams");
         if (response.status === 200) {
-          console.log(response.data.exams);
           setExams(response.data.exams);
         } else {
           alert("Error in fetching exams");
         }
       } catch (error) {
-        console.error(error);
+        console.error("Error in Fetching Exams:", error);
+        if (error.response) {
+          alert(
+            "Error from server: " +
+              error.response.status +
+              " - " +
+              error.response.data.message
+          );
+        } else if (error.request) {
+          alert("No response from the server");
+        } else {
+          alert("Error setting up the request: " + error.message);
+        }
       }
     };
     main();
