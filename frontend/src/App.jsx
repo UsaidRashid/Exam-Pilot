@@ -3,11 +3,12 @@ import "./App.css";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import Home from "./Components/Home";
-import Dashboard from "./Components/Dashboard";
 import UpcomingExams from "./Components/UpcomingExams";
 import Exams from "./Components/Exams";
 import DisplayPaper from "./Components/DisplayPaper";
 import Navbar from "./Components/Navbar";
+import TeacherDashboard from "./Components/TeacherDashboard";
+import StudentDashboard from "./Components/StudentDashboard";
 
 const AppContent = () => {
   const location = useLocation();
@@ -21,7 +22,8 @@ const AppContent = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
+        <Route path="/student-dashboard" element={<StudentDashboard />} />
         <Route path="/display-paper" element={<DisplayPaper />} />
         <Route path="/upcoming-exams" element={<UpcomingExams />} />
         <Route path="/exams" element={<Exams />} />

@@ -28,7 +28,7 @@ export default function Login() {
       if (response.status === 200) {
         alert('Login Succesful!');
         localStorage.setItem('token',response.data.token);
-        navigate("/teacher-dashboard");
+        navigate("/dashboard");
       } else {
         console.error("Login failed:", response.data);
       }

@@ -41,7 +41,7 @@ export default function TeacherDashboard() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/questions/generate-questions/",
+        "http://localhost:3001/exams/generate-questions/",
         formData,
         {
           headers: {

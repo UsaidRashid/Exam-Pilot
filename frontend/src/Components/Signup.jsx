@@ -33,7 +33,7 @@ export default function Signup() {
       if (response.status === 200) {
         alert('Registration Successful!');
         localStorage.setItem("token",response.data.token);
-        navigate("/teacher-dashboard");
+        navigate("/dashboard");
       } else {
         console.error("Signup failed:", response.data);
       }

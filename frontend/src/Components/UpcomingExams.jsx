@@ -10,7 +10,7 @@ export default function UpcomingExams() {
     const main = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3001/upcoming-exams"
+          "http://localhost:3001/exams/upcoming-exams"
         );
         if (response.status === 200) {
           console.log(response.data.exams);
@@ -23,7 +23,7 @@ export default function UpcomingExams() {
       }
     };
     main();
-  },[exams]);
+  }, [exams]);
 
   const getdata = (paper) => {
     navigate(`/display-paper`, { state: { paper } });
@@ -32,26 +32,6 @@ export default function UpcomingExams() {
   return (
     <>
       <div className=' bg-[url("./public/assets/dasboardBackground.jpeg")] bg-no-repeat bg-cover w-full h-screen overflow-y-auto'>
-        <nav className="flex w-full h-22 py-4 sticky">
-          <div className="h-full flex justify-center align-middle m-auto">
-            <ul className="flex m-auto gap-11">
-              <li className=" bg-gray-500 px-2 py-4 rounded-full text-white">
-                dashboard
-              </li>
-              <Link to="/upcoming-exam">
-                <li className=" bg-gray-500 px-2 py-4 rounded-full text-white">
-                  upcoming exams
-                </li>
-              </Link>
-              <li className=" bg-gray-500 px-2 py-4 rounded-full text-white">
-                Leaderboard
-              </li>
-              <li className=" bg-gray-500 px-2 py-4 rounded-full text-white">
-                Logout
-              </li>
-            </ul>
-          </div>
-        </nav>
         <div>
           <div className=" w-[80%] m-auto bg-black bg-opacity-75 shadow-lg shadow-gray-700 rounded flex justify-center mt-11 ">
             <ul role="list" className="w-5/6 divide-gray-100 my-8">

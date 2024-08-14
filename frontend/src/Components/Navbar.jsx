@@ -18,15 +18,16 @@ export default function Navbar() {
       <nav className="flex w-full h-18 py-4 bg-black">
         <div className="h-full flex justify-center align-middle m-auto">
           <ul className="flex m-auto gap-11">
-            <Link to="/dashboard">
-              <li className="bg-gray-500 px-2 py-4 rounded-full text-white">
-                Dashboard
-              </li>
-            </Link>
-            {token && token.user && token.user.type === "Teacher" && (
-              <Link to="/generate-exam">
+            {token?.user?.type === "Teacher" ? (
+              <Link to="/teacher-dashboard">
                 <li className="bg-gray-500 px-2 py-4 rounded-full text-white">
-                  Generate Exam
+                  Dashboard
+                </li>
+              </Link>
+            ) : (
+              <Link to="/student-dashboard">
+                <li className="bg-gray-500 px-2 py-4 rounded-full text-white">
+                  Dashboard
                 </li>
               </Link>
             )}
