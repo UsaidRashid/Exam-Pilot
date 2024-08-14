@@ -26,7 +26,8 @@ export default function Login() {
     try {
       const response = await axios.post("http://localhost:3001/login", user);
       if (response.status === 200) {
-        alert('Registration Succesful!');
+        alert('Login Succesful!');
+        localStorage.setItem('token',response.data.token);
         navigate("/teacher-dashboard");
       } else {
         console.error("Login failed:", response.data);
