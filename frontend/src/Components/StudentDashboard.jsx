@@ -10,13 +10,13 @@ export default function StudentDashboard() {
       <Sidebar />
       <div className="flex flex-col justify-center items-center w-full">
         <div className="flex flex-row justify-between w-3/4 mb-16">
-          <div className="w-1/2 mx-4 p-8 bg-white/50 backdrop-blur-lg shadow-xl rounded-lg text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">Exams Given</h2>
-            <p className="text-2xl text-gray-600">12</p>
+          <div className="w-1/2 mx-4 p-8 bg-white/50 backdrop-blur-lg shadow-xl rounded-lg text-center transform transition-transform duration-500 hover:scale-105 animate-pulse hover:animate-none">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4 animate-bounce">Exams Given</h2>
+            <p className="text-2xl text-gray-600 animate-fadeIn">12</p>
           </div>
-          <div className="w-1/2 mx-4 p-8 bg-white/50 backdrop-blur-lg shadow-xl rounded-lg text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">Average Score</h2>
-            <p className="text-2xl text-gray-600">85%</p>
+          <div className="w-1/2 mx-4 p-8 bg-white/50 backdrop-blur-lg shadow-xl rounded-lg text-center transform transition-transform duration-500 hover:scale-105 animate-pulse hover:animate-none">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4 animate-bounce">Average Score</h2>
+            <p className="text-2xl text-gray-600 animate-fadeIn">85%</p>
           </div>
         </div>
 
