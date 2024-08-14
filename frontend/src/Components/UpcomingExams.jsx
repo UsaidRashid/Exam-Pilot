@@ -31,47 +31,40 @@ export default function UpcomingExams() {
 
   return (
     <>
-      <div className=' bg-[url("./public/assets/dasboardBackground.jpeg")] bg-no-repeat bg-cover w-full h-screen overflow-y-auto'>
-        <div>
-          <div className=" w-[80%] m-auto bg-black bg-opacity-75 shadow-lg shadow-gray-700 rounded flex justify-center mt-11 ">
-            <ul role="list" className="w-5/6 divide-gray-100 my-8">
-              <h1 className="text-center text-3xl text-gray-500 font-bold mt-9">
-                Upcoming Exams
-              </h1>
-              {exams &&
-                exams.map((item, index) => {
-                  return (
-                    <li
-                      key={index}
-                      className="flex justify-between gap-x-6 py-5 border-b-2 border-gray-300"
+      <div className="bg-gradient-to-r from-gray-800 to-black w-full h-screen overflow-y-auto flex justify-center items-center">
+        <div className="w-[80%] m-auto bg-gray-900 bg-opacity-80 shadow-2xl rounded-lg p-8">
+          <h1 className="text-center text-4xl text-gray-300 font-bold mb-10">
+            Upcoming Exams
+          </h1>
+          <ul role="list" className="w-full divide-y divide-gray-700">
+            {exams &&
+              exams.map((item, index) => (
+                <li
+                  key={index}
+                  className="flex justify-between items-center py-5 hover:bg-gray-700 transition duration-300 rounded-lg"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="text-lg font-semibold text-gray-200">
+                      {item.Name}
+                    </div>
+                    <div className="text-sm text-gray-400 ml-4">
+                      Start at: {item.scheduledTime}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="text-sm text-gray-400">
+                      {item.numQuestions} Questions | {item.timeAllotted} h
+                    </div>
+                    <button
+                      className="px-6 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-300"
+                      onClick={() => getdata(item)}
                     >
-                      <div className="flex min-w-0 gap-x-4">
-                        <div className="min-w-0 flex-auto">
-                          <p className="text-lg font-semibold leading-6 text-gray-900">
-                            {item.Name}
-                          </p>
-                          <p className="mt-1 truncate text-sm leading-5 text-gray-500 ml-4">
-                            start at: {item.scheduledTime}
-                          </p>
-                        </div>
-                        <div className="shrink-0 sm:flex sm:flex-col justify-start items-center">
-                          <div className="mt-1 truncate text-sm leading-5 text-gray-500 flex gap-2">
-                            <span>{item.numQuestions}</span> |{" "}
-                            <span>{item.timeAllotted} h</span>
-                          </div>
-                          <button
-                            className=" px-8 rounded-md cursor-pointer h-8 text-white bg-slate-500 hover:bg-slate-700"
-                            onClick={() => getdata(item)}
-                          >
-                            go to exam
-                          </button>
-                        </div>
-                      </div>
-                    </li>
-                  );
-                })}
-            </ul>
-          </div>
+                      Go to Exam
+                    </button>
+                  </div>
+                </li>
+              ))}
+          </ul>
         </div>
       </div>
     </>

@@ -1,64 +1,26 @@
-.logo-container {
-  width: 80%;
-  max-width: 300px;
-  height: 50%;
-  position: relative;
+.logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
 }
 
-.logo {
-  width: 100%;
-  height: 50%;
-  animation: shine 3s infinite linear;
+.logo-container:hover .logo {
+  transform: scale(1.1) rotate(10deg);
 }
 
 .get-started-btn {
-  padding: 1rem 2rem;
+  padding: 10px 30px;
   font-size: 1.5rem;
-  font-weight: bold;
   color: white;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  animation: shine 3s infinite linear;
+  background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  border-radius: 30px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-.get-started-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.5) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transform: skewX(-25deg);
-  animation: btnShine 2s infinite;
-}
-
-@keyframes shine {
-  0% {
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.8;
-  }
-}
-
-@keyframes btnShine {
-  0% {
-    left: -75%;
-  }
-  100% {
-    left: 125%;
-  }
+.get-started-btn:hover {
+  background: linear-gradient(to right, #00c6ff 0%, #0072ff 100%);
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
 }
