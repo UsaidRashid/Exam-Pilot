@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+const api = import.meta.env.VITE_BACKEND_URL;
 
 export default function UpcomingExams() {
   const [exams, setExams] = useState([]);
@@ -10,7 +11,7 @@ export default function UpcomingExams() {
     const main = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3001/exams/upcoming-exams"
+          api+"upcoming-exams"
         );
         if (response.status === 200) {
           console.log(response.data.exams);

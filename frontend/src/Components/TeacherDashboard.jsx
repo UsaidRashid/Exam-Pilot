@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "./Sidebar";
+const api = import.meta.env.VITE_BACKEND_URL;
 
 export default function TeacherDashboard() {
   const [paper, setPaper] = useState({
@@ -42,7 +43,7 @@ export default function TeacherDashboard() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/exams/generate-questions/",
+        api+"generate-questions/",
         formData,
         {
           headers: {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+const api = import.meta.env.VITE_BACKEND_URL;
 
 export default function Login() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function Login() {
   async function setData(e) {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/login", user);
+      const response = await axios.post(api+"login", user);
       if (response.status === 200) {
         alert("Login Succesful!");
         localStorage.setItem("token", response.data.token);
