@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-
 export default function TeacherDashboard() {
   let [paper, setpaper] = useState({
-    requestId: "",
     name: "",
     numQuestions: 0,
     scheduledTime: "",
@@ -28,7 +26,7 @@ export default function TeacherDashboard() {
       console.log("paper", paper);
       console.log("sending");
       const response = await axios.post(
-        "http://localhost:3001/generate-questions/",
+        "http://localhost:3001/questions/generate-questions/",
         paper,
         {
           headers: {
