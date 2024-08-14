@@ -11,28 +11,32 @@ export default function Sidebar() {
       setToken(decodedToken);
     }
   }, []);
+
   return (
-    <div>
-      <div className="w-33%">
-        <div className="flex">
-          <img
-            className="inline-block h-16 w-16 rounded-full ring-2 ring-white"
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            alt=""
-          />
-          <div className="mx-3">
-            <h1>Name</h1>
-            <p>{token?.user?.name}</p>
-          </div>
+    <div className="w-72 bg-gray-800 text-white h-full py-8 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+      <div className="flex items-center mb-6">
+        <img
+          className="inline-block h-16 w-16 rounded-full ring-2 ring-gray-300 shadow-md"
+          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          alt="User Profile"
+        />
+        <div className="ml-4">
+          <h1 className="text-xl font-semibold">Welcome</h1>
+          <p className="text-sm text-gray-400">{token?.user?.name}</p>
+        </div>
+      </div>
+      <div className="space-y-6">
+        <div className="my-4">
+          <div className="text-lg font-bold text-gray-300">Contact</div>
+          <div className="text-gray-400">{token?.user?.contact}</div>
         </div>
         <div className="my-4">
-          <div className="text-lg font-bold">Contact</div>
-          <div>{token?.user?.contact}</div>
+          <div className="text-lg font-bold text-gray-300">Email</div>
+          <div className="text-gray-400">{token?.user?.email}</div>
         </div>
-        <div className="my-4">
-          <div className="text-lg font-bold">Email</div>
-          <div>{token?.user?.email}</div>
-        </div>
+      </div>
+      <div className="mt-8">
+        
       </div>
     </div>
   );
