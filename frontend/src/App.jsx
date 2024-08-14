@@ -10,6 +10,8 @@ import StudentDashboard from "./Components/StudentDashboard";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import ProtectPaper from "./Components/ProtectPaper";
 import Home from "./Components/Home";
+import ProtectStudent from "./Components/ProtectStudent";
+import ProtectTeacher from "./Components/ProtectTeacher";
 
 const AppContent = () => {
   const location = useLocation();
@@ -31,7 +33,9 @@ const AppContent = () => {
           path="/teacher-dashboard"
           element={
             <ProtectedRoute>
-              <TeacherDashboard />
+              <ProtectTeacher>
+                <TeacherDashboard />
+              </ProtectTeacher>
             </ProtectedRoute>
           }
         />
@@ -39,7 +43,9 @@ const AppContent = () => {
           path="/student-dashboard"
           element={
             <ProtectedRoute>
-              <StudentDashboard />
+              <ProtectStudent>
+                <StudentDashboard />
+              </ProtectStudent>
             </ProtectedRoute>
           }
         />

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+const api = import.meta.env.VITE_BACKEND_URL;
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ export default function Signup() {
     e.preventDefault();
     try {
       console.log(user);
-      const response = await axios.post("http://localhost:3001/signup", user);
+      const response = await axios.post(api+"signup", user);
       if (response.status === 200) {
         alert("Registration Successful!");
         localStorage.setItem("token", response.data.token);
