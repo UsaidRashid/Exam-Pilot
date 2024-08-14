@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Sidebar from "./Sidebar";
 
 export default function TeacherDashboard() {
   let [paper, setpaper] = useState({
@@ -63,65 +64,8 @@ export default function TeacherDashboard() {
   return (
     <>
       <div className=' bg-[url("./public/assets/dasboardBackground.jpeg")] bg-no-repeat bg-cover w-full h-screen'>
-        <nav className="flex w-full h-22 py-4">
-          <div className="h-full flex justify-center align-middle m-auto">
-            <ul className="flex m-auto gap-11">
-              <li className="bg-gray-500 px-2 py-4 rounded-full text-white">
-                Dashboard
-              </li>
-              <Link to={"/upcoming-exams"}>
-                <li className="bg-gray-500 px-2 py-4 rounded-full text-white">
-                  Upcoming Exams
-                </li>
-              </Link>
-              <li className="bg-gray-500 px-2 py-4 rounded-full text-white">
-                Leaderboard
-              </li>
-              <li
-                className="bg-gray-500 px-2 py-4 rounded-full text-white"
-                onClick={() => {
-                  localStorage.clear();
-                  alert("Logged Out Successful!");
-                  navigate("/login");
-                }}
-              >
-                Logout
-              </li>
-            </ul>
-          </div>
-        </nav>
-
         <div className="mx-16 mt-12 flex">
-          <div className="w-33%">
-            <div className="flex">
-              <img
-                className="inline-block h-16 w-16 rounded-full ring-2 ring-white"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              />
-              <div className="mx-3">
-                <h1>Name</h1>
-                <p>Amish</p>
-              </div>
-            </div>
-            <div className="my-4">
-              <div className="text-lg font-bold">Department</div>
-              <div>Computer Science</div>
-            </div>
-            <div className="my-4">
-              <div className="text-lg font-bold">DOB</div>
-              <div>12/04/1992</div>
-            </div>
-            <div className="my-4">
-              <div className="text-lg font-bold">Contact</div>
-              <div>31412413123</div>
-            </div>
-            <div className="my-4">
-              <div className="text-lg font-bold">Email</div>
-              <div>abc@gmail.com</div>
-            </div>
-          </div>
-
+          <Sidebar />
           <div className="mx-48">
             <div className="text-2xl font-bold mb-14">Details for Exam:</div>
             <form className="mx-9" onSubmit={postData}>
