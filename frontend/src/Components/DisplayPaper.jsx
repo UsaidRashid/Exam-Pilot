@@ -1,149 +1,108 @@
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import { useParams, useNavigate } from "react-router-dom";
-
-// export default function DisplayPaper() {
-//   const { id } = useParams(); 
-//   const [questions, setQuestions] = useState([]);
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-    
-//     async function fetchQuestions() {
-//       try {
-//         console.log("Fetching questions with ID:", id);
-//         const response = await axios.post(
-//           "http://localhost:3001/questions/fetch-questions/",
-//           { _id: id } 
-//         );
-//         setQuestions(response.data.questions);
-//       } catch (error) {
-//         console.error("Error fetching questions:", error);
-//       }
-//     }
-
-//     fetchQuestions();
-//   }, [id]);
-
-//   return (
-//     <div className="container mx-auto py-8">
-//       <h1 className="text-2xl font-bold mb-8">Exam Questions</h1>
-//       {questions && questions.length > 0 ? (
-//         <div className="space-y-6">
-        
-//           {questions.map((question, index) => (
-//             <div key={index} className="p-4 border border-gray-300 rounded-lg">
-//               <p className="font-semibold">
-//                 {index + 1}. {question.text}
-//               </p>
-//               <ul className="list-disc pl-5 mt-2">
-//                 {question.options.map((option, i) => (
-//                   <li key={i} className="mt-1">
-//                     <input
-//                       type="radio"
-//                       name={`question-${index}`}
-//                       value={option}
-//                       className="mr-2"
-//                     />
-//                     {option}
-//                   </li>
-//                 ))}
-//               </ul>
-//             </div>
-//           ))}
-//         </div>
-//       ) : (
-//         <p>No questions available.</p>
-//       )}
-//       <button
-//         onClick={() => navigate(-1)}
-//         className="mt-8 bg-blue-500 text-white px-4 py-2 rounded"
-//       >
-//         Back to Dashboard
-//       </button>
-//     </div>
-//   );
-// }
-
 import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
 
-export default function DisplayPaper() {
-  const { id } = useParams(); 
-  console.log("ID from URL:", id); 
-  const [questions, setQuestions] = useState([]);
+export default function DisplayPaper(props) {
+  const [paper, setPaper] = useState();
+  const [answers, setAnswers] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    async function fetchQuestions() {
-      try {
-        console.log("Fetching questions with ID:", id);
-        const response = await axios.post(
-          "http://localhost:3001/questions/fetch-questions/",
-          { _id: id}  
-         
-        );
-        
-        if (response.status === 200 && response.data.questions) {
-          setQuestions(response.data.questions);
-        } else {
-          console.error("Failed to fetch questions, no questions found.");
-        }
-      } catch (error) {
-        console.error("Error fetching questions:", error);
-      }
-    }
+    const paperData = location.state.paper;
+    setPaper(paperData);
+    const initialAnswers = Array(paperData.numQuestions).fill("NA");
+    setAnswers(initialAnswers);
+  }, [location.state.paper]);
 
-    fetchQuestions();
-  }, [id]);
+  const token = localStorage.getItem("token");
+  let userId = null;
+  if (token) {
+    const decodedToken = jwtDecode(token);
+    userId = decodedToken.user._id;
+  }
+
+  const handleOptionChange = (index, value) => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[index] = value;
+    setAnswers(updatedAnswers);
+  };
+
+  const handleFinishExam = async () => {
+    try {
+      console.log("Answers submitted: ", answers);
+      const paperId = paper._id;
+      const response = await axios.post(
+        "http://localhost:3001/exams/check-exam",
+        { answers, examId: paperId, studentId: userId }
+      );
+      if (response.status === 200) {
+        alert("Exam Successfully Submitted");
+        navigate("/student-dashboard");
+      } else {
+        alert(response.data.message || "An Error occured");
+      }
+    } catch (error) {
+      alert("Internal Server Error");
+      console.error(error);
+    }
+  };
 
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-2xl font-bold mb-8">Exam Questions</h1>
-      {questions.length > 0 ? (
+      {paper?.questions?.length > 0 ? (
         <div className="space-y-6">
-          {questions.map((question, index) => (
+          {paper.questions.map((question, index) => (
             <div key={index} className="p-4 border border-gray-300 rounded-lg">
               <p className="font-semibold">
-                {index + 1}. {question.question}  
+                {index + 1}. {question.question}
               </p>
               <ul className="list-disc pl-5 mt-2">
                 <li className="mt-1">
                   <input
                     type="radio"
                     name={`question-${index}`}
-                    value={question.optA}
+                    value="A"
+                    checked={answers[index] === "A"}
+                    onChange={() => handleOptionChange(index, "A")}
                     className="mr-2"
                   />
-                  {question.optA}  
+                  {question.optA}
                 </li>
                 <li className="mt-1">
                   <input
                     type="radio"
                     name={`question-${index}`}
-                    value={question.optB}
+                    value="B"
+                    checked={answers[index] === "B"}
+                    onChange={() => handleOptionChange(index, "B")}
                     className="mr-2"
                   />
-                  {question.optB}  
+                  {question.optB}
                 </li>
                 <li className="mt-1">
                   <input
                     type="radio"
                     name={`question-${index}`}
-                    value={question.optC}
+                    value="C"
+                    checked={answers[index] === "C"}
+                    onChange={() => handleOptionChange(index, "C")}
                     className="mr-2"
                   />
-                  {question.optC}  
+                  {question.optC}
                 </li>
                 <li className="mt-1">
                   <input
                     type="radio"
                     name={`question-${index}`}
-                    value={question.optD}
+                    value="D"
+                    checked={answers[index] === "D"}
+                    onChange={() => handleOptionChange(index, "D")}
                     className="mr-2"
                   />
-                  {question.optD}  
+                  {question.optD}
                 </li>
               </ul>
             </div>
@@ -153,13 +112,11 @@ export default function DisplayPaper() {
         <p>No questions available.</p>
       )}
       <button
-        onClick={() => navigate(-1)}
-        className="mt-8 bg-blue-500 text-white px-4 py-2 rounded"
+        onClick={handleFinishExam}
+        className="mt-8 px-4 py-2 bg-blue-500 text-white rounded-lg"
       >
-        Back to Dashboard
+        Finish Exam!
       </button>
     </div>
   );
 }
-
-

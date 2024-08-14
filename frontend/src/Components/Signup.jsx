@@ -7,10 +7,11 @@ export default function Signup() {
 
   let [user, setUser] = useState({
     name: "",
-    userName: "",
+    username: "",
     email: "",
     contact: "",
     password: "",
+    type: "",
   });
 
   function getdata(e) {
@@ -27,20 +28,19 @@ export default function Signup() {
   async function setData(e) {
     e.preventDefault();
     try {
+      console.log(user);
       const response = await axios.post("http://localhost:3001/signup", user);
       if (response.status === 200) {
-        
-        navigate("/home");
+        alert('Registration Successful!');
+        localStorage.setItem("token",response.data.token);
+        navigate("/dashboard");
       } else {
-        
         console.error("Signup failed:", response.data);
       }
     } catch (error) {
       console.error("There was an error during signup:", error);
-      
     }
   }
-
 
   return (
     <>
@@ -107,6 +107,24 @@ export default function Signup() {
                 onChange={getdata}
               />
             </div>
+            <div className="flex flex-col mt-4">
+              <label htmlFor="type" className="font-semibold text-lg">
+                You are a?
+              </label>
+              <select
+                required
+                className="border-b-2 outline-none px-2 my-2 focus:border-gray-500"
+                name="type"
+                onChange={getdata}
+              >
+                <option value="" disabled selected>
+                  Select your role
+                </option>
+                <option value="Teacher">Teacher</option>
+                <option value="Student">Student</option>
+              </select>
+            </div>
+
             <div className="flex flex-col mt-4">
               <label htmlFor="password" className="font-semibold text-lg">
                 Password

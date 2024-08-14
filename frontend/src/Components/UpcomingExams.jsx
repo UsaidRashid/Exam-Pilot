@@ -1,45 +1,45 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function UpcomingExams() {
-  const [exam, setExam] = useState([]);
+  const [exams, setExams] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const main = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:3001/exams/upcoming-exams"
+        );
+        if (response.status === 200) {
+          console.log(response.data.exams);
+          setExams(response.data.exams);
+        } else {
+          alert("Error in fetching exams");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    main();
+  }, [exams]);
+
+  const getdata = (paper) => {
+    navigate(`/display-paper`, { state: { paper } });
+  };
 
   return (
     <>
       <div className=' bg-[url("./public/assets/dasboardBackground.jpeg")] bg-no-repeat bg-cover w-full h-screen overflow-y-auto'>
-        <nav className="flex w-full h-22 py-4 sticky">
-          <div className="h-full flex justify-center align-middle m-auto">
-            <ul className="flex m-auto gap-11">
-            <Link to="/">
-              <li className=" bg-gray-500 px-2 py-4 rounded-full text-white">
-                dashboard
-              </li>
-              </Link>
-              <Link to="/upcoming-exams">
-                <li className=" bg-gray-500 px-2 py-4 rounded-full text-white">
-                  upcoming exams
-                </li>
-              </Link>
-              <Link to="/upcoming-exams">
-              <li className=" bg-gray-500 px-2 py-4 rounded-full text-white">
-                Leaderboard
-              </li>
-              </Link>
-              <li className=" bg-gray-500 px-2 py-4 rounded-full text-white">
-                Logout
-              </li>
-            </ul>
-          </div>
-        </nav>
         <div>
           <div className=" w-[80%] m-auto bg-black bg-opacity-75 shadow-lg shadow-gray-700 rounded flex justify-center mt-11 ">
             <ul role="list" className="w-5/6 divide-gray-100 my-8">
               <h1 className="text-center text-3xl text-gray-500 font-bold mt-9">
                 Upcoming Exams
               </h1>
-              {exam &&
-                exam.map((item, index) => {
+              {exams &&
+                exams.map((item, index) => {
                   return (
                     <li
                       key={index}
@@ -61,7 +61,7 @@ export default function UpcomingExams() {
                           </div>
                           <button
                             className=" px-8 rounded-md cursor-pointer h-8 text-white bg-slate-500 hover:bg-slate-700"
-                            // onClick={() => getdata(item)}
+                            onClick={() => getdata(item)}
                           >
                             go to exam
                           </button>
