@@ -9,6 +9,7 @@ import TeacherDashboard from "./Components/TeacherDashboard";
 import StudentDashboard from "./Components/StudentDashboard";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import ProtectPaper from "./Components/ProtectPaper";
+import Home from "./Components/Home";
 
 const AppContent = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ const AppContent = () => {
     <>
       {showNavbar && <Navbar />}
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route

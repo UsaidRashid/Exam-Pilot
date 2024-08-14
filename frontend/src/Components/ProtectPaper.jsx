@@ -7,15 +7,13 @@ export default function ProtectPaper({ children }) {
 
   if (!token) {
     alert("You must be logged in!");
-    <Navigate to="/login" />;
-    return;
+    return <Navigate to="/login" />;
   }
 
   const decodedToken = jwtDecode(token);
   if (decodedToken.user.type !== "Student") {
     alert("You are not authorized to give an exam!");
-    <Navigate to="/" />;
-    return;
+    return <Navigate to="/" />;
   }
 
   return children;
