@@ -1,4 +1,5 @@
 const Questions = require("../models/questions");
+const User = require("../models/users");
 const generateRandomQuestions = require("../ai_module/AI");
 
 module.exports.generateQuestions = async (req, res) => {
@@ -138,5 +139,33 @@ module.exports.getUpcomingExams = async (req, res) => {
     res
       .status(500)
       .json({ message: "Error in fetching upcoming exams", error });
+  }
+};
+
+module.exports.checkExam = async (req, res) => {
+  try {
+    console.log(req.body);
+    const { answers, examId, studentId } = req.body;
+    const student = await User.findOne({ _id: studentId });
+    const exam = await Questions.findOne({ _id: examId });
+    if (!student || !exam)
+      return res.status(400).json({ message: "No user or Exam found" });
+    let examsGiven = student.examsGiven;
+    examsGiven++;
+    console.log(exam);
+    const questions = exam.questions;
+    let score = 0;
+    for (let i = 0; i < questions.length; i++) {
+      if (questions[i].ans === answers[i]) score++;
+    }
+    let avg = student.score;
+    avg = (avg + score) / examsGiven;
+    student.examsGiven = examsGiven;
+    student.score = avg;
+    await student.save();
+    return res.status(200).json({ message: "Exam Successfully Checked!" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };

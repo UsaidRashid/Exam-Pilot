@@ -10,4 +10,6 @@ router
 
 router.route("/upcoming-exams").post(examController.getUpcomingExams);
 
+router.route("/check-exam").post(examController.checkExam);
+
 module.exports = router;
