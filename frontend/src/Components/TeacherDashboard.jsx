@@ -487,17 +487,21 @@ export default function TeacherDashboard() {
         <nav className="flex w-full h-22 py-4">
           <div className="h-full flex justify-center align-middle m-auto">
             <ul className="flex m-auto gap-11">
+            <Link to={"/teacher-dashboard"}>
               <li className="bg-gray-500 px-2 py-4 rounded-full text-white">
                 Dashboard
               </li>
-              <Link to={"/upcoming-exam"}>
+              </Link>
+              <Link to={"/upcoming-exams"}>
                 <li className="bg-gray-500 px-2 py-4 rounded-full text-white">
                   Upcoming Exams
                 </li>
               </Link>
+              <Link to={"/leaderboard"}>
               <li className="bg-gray-500 px-2 py-4 rounded-full text-white">
                 Leaderboard
               </li>
+              </Link>
               <li className="bg-gray-500 px-2 py-4 rounded-full text-white">
                 Logout
               </li>

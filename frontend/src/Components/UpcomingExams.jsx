@@ -11,17 +11,21 @@ export default function UpcomingExams() {
         <nav className="flex w-full h-22 py-4 sticky">
           <div className="h-full flex justify-center align-middle m-auto">
             <ul className="flex m-auto gap-11">
+            <Link to="/">
               <li className=" bg-gray-500 px-2 py-4 rounded-full text-white">
                 dashboard
               </li>
-              <Link to="/upcoming-exam">
+              </Link>
+              <Link to="/upcoming-exams">
                 <li className=" bg-gray-500 px-2 py-4 rounded-full text-white">
                   upcoming exams
                 </li>
               </Link>
+              <Link to="/upcoming-exams">
               <li className=" bg-gray-500 px-2 py-4 rounded-full text-white">
                 Leaderboard
               </li>
+              </Link>
               <li className=" bg-gray-500 px-2 py-4 rounded-full text-white">
                 Logout
               </li>
